@@ -1,3 +1,4 @@
+/*
 package com.wbz.wbzapi.util;
 
 import com.google.gson.Gson;
@@ -14,3 +15,4 @@ public class JsonParser {
         return GSON.fromJson(content, clazz);
     }
 }
+*/
