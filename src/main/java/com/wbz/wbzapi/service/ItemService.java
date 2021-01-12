@@ -4,18 +4,15 @@ import com.wbz.wbzapi.entity.Item;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class ItemService {
-    private static List<Item> items = new ArrayList<>(List.of(
-            new Item("Молоко","нет его",12.2,"https://vk.com/away.php?utf=1&to=https%3A%2F%2Fcdn2.scratch.mit.edu%2Fget_image%2Fuser%2F22140082_60x60.png"),
-            new Item("Кола","нет его",20.01,"https://vk.com/away.php?utf=1&to=https%3A%2F%2Fcdn2.scratch.mit.edu%2Fget_image%2Fuser%2F22140082_60x60.png"),
-            new Item("Сникерс","нет его",510.1,"https://vk.com/away.php?utf=1&to=https%3A%2F%2Fcdn2.scratch.mit.edu%2Fget_image%2Fuser%2F22140082_60x60.png"),
-            new Item("Карандаш","нет его",242351,"https://vk.com/away.php?utf=1&to=https%3A%2F%2Fcdn2.scratch.mit.edu%2Fget_image%2Fuser%2F22140082_60x60.png"),
-            new Item("Коробка","нет его",201251,"https://vk.com/away.php?utf=1&to=https%3A%2F%2Fcdn2.scratch.mit.edu%2Fget_image%2Fuser%2F22140082_60x60.png")
-    ));
+    private static List<Item> items = new ArrayList<>();
 
-
+    static {
+        for (int i = 0; i<100; i++){
+            items.add(new Item("Товар #" + i,"нет его",Math.random()*10000,"https://cdn2.scratch.mit.edu/get_image/user/22140082_60x60.png"));
+        }
+    }
     public static List<Item> saveUpdateItem(Item item){
         for (Item itemInList : items){
             if (itemInList.getName().equals(item.getName())){
@@ -29,8 +26,17 @@ public class ItemService {
     }
 
     public static List<Item> deleteItem(Item item){
-       items = items.stream().filter( n -> !n.equals(item)).collect(Collectors.toList());
+        Item itemToDel = null;
+        for (Item del : items){
+            if (item.getName().equals(del.getName())){
+                itemToDel = del;
+            }
+        }
+        items.remove(itemToDel);
+        System.out.println(items.size());
         return items;
+       /*items = items.stream().filter( n -> !n.equals(item)).collect(Collectors.toList());
+        return items;*/
     }
 
    /* public static List<Item> addItem(Item item){

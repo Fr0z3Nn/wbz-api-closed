@@ -11,6 +11,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebM
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests().antMatchers("/**").permitAll();
+        http.csrf().disable();
     }
     @Override
     public void addCorsMappings(CorsRegistry registry) {

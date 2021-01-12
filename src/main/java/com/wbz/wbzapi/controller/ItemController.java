@@ -2,11 +2,9 @@ package com.wbz.wbzapi.controller;
 
 import com.wbz.wbzapi.entity.Item;
 import com.wbz.wbzapi.service.ItemService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 
@@ -33,10 +31,9 @@ public class ItemController {
     }
 
     @PostMapping(
-            value = "/deleteItem", consumes = "application/json", produces = "application/json")
+            value = "/deleteItem")
     public List<Item> deleteItem(@RequestBody Item item) {
-
-
+        System.out.println("ОПАЧА УДАЛЯЕМ");
         return ItemService.deleteItem(item);
     }
 }
