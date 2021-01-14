@@ -9,6 +9,8 @@ import javax.persistence.*;
 @Setter
 @Entity
 @ToString
+@AllArgsConstructor
+@Table(name = "item")
 public class Item {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
@@ -21,10 +23,5 @@ public class Item {
     public Item() {
     }
 
-    public Item(String name, String description, double price, String image) {
-        this.name = name;
-        this.description = description;
-        this.price = price;
-        this.image = image;
-    }
+
 }
