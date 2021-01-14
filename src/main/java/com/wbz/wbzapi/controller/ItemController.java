@@ -1,16 +1,24 @@
 package com.wbz.wbzapi.controller;
 
+import com.wbz.wbzapi.entity.Item;
+import com.wbz.wbzapi.service.Impl.ItemServiceImpl;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 
 @RestController
+@RequiredArgsConstructor
 public class ItemController {
 
-//    @RequestMapping("/item")
-//    public List<Item> getItem() {
-//        System.out.println("запрос прилетел");
-//        return ItemService.getAllItems();
-//    }
+    private final ItemServiceImpl itemService;
+
+    @RequestMapping("/item")
+    public List<Item> getItem() {
+        System.out.println("запрос прилетел");
+        return itemService.getAllItems();
+    }
 //
 //    @PostMapping(
 //            value = "/createItem", consumes = "application/json", produces = "application/json")
@@ -25,11 +33,11 @@ public class ItemController {
 //        return ItemService.saveUpdateItem(item);
 //    }
 //
-//    @PostMapping(
-//            value = "/deleteItem")
-//    public List<Item> deleteItem(@RequestBody Item item) {
-//        System.out.println("ОПАЧА УДАЛЯЕМ");
-//        return ItemService.deleteItem(item);
-//    }
+    @PostMapping(
+            value = "/deleteItem")
+    public void deleteItem(@RequestBody Item item) {
+        System.out.println("ОПАЧА УДАЛЯЕМ");
+         itemService.deleteItem(item.getId());
+    }
 }
 
