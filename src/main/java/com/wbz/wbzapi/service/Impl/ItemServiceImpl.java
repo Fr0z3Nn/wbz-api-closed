@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -19,7 +20,8 @@ public class ItemServiceImpl implements ItemService {
     @Override
     public List<Item> deleteItem(Long id) {
         itemRepository.deleteById(id);
-        System.out.println(itemRepository.findAll().get(0));
+        List<Item> l1 = new ArrayList<>();
+
         List<Item> items = itemRepository.findAll();
         return items;
     }

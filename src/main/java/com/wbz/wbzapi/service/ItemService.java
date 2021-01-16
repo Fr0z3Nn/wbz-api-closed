@@ -1,8 +1,10 @@
 package com.wbz.wbzapi.service;
 
+import com.wbz.wbzapi.entity.Item;
+
 import java.util.List;
 
 public interface ItemService {
-    List deleteItem(Long id);
-    List getAllItems();
+    List<Item> deleteItem(Long id);
+    List<Item> getAllItems();
 }

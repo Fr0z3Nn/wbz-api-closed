@@ -7,6 +7,7 @@ import com.wbz.wbzapi.service.Impl.UserServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -15,15 +16,16 @@ public class UserController {
 
     private final UserServiceImpl userService;
 
-    @PostMapping(
-            value = "/api/register")
+    @RequestMapping("/api/register")
     public void saveUser(@RequestBody User user) {
+        System.out.println(123);
         userService.save(user);
     }
 
-    @PostMapping(
-            value = "/api/login_check")
-    public User getById(@RequestBody Long id) {
-        return userService.getById(id);
+    @PostMapping("/login_check")
+    public User getById(@RequestBody Object user) {
+
+        System.out.println(55555555);
+        return userService.getById(1L);
     }
 }

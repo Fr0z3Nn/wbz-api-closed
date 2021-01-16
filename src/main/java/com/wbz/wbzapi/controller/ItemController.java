@@ -35,9 +35,10 @@ public class ItemController {
 //
     @PostMapping(
             value = "/deleteItem")
-    public void deleteItem(@RequestBody Item item) {
+    public List<Item> deleteItem(@RequestBody Item item) {
         System.out.println("ОПАЧА УДАЛЯЕМ");
          itemService.deleteItem(item.getId());
+         return itemService.getAllItems();
     }
 }
 
