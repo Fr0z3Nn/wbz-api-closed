@@ -19,22 +19,20 @@ public class ItemController {
         System.out.println("запрос прилетел");
         return itemService.getAllItems();
     }
-//
-//    @PostMapping(
-//            value = "/createItem", consumes = "application/json", produces = "application/json")
-//    public List<Item> createItem(@RequestBody Item item) {
-//        return ItemService.saveUpdateItem(item);
-//    }
-//
-//    @PostMapping(
-//            value = "/updateItem", consumes = "application/json", produces = "application/json")
-//    public List<Item> updateItem(@RequestBody Item item) {
-//
-//        return ItemService.saveUpdateItem(item);
-//    }
-//
-    @PostMapping(
-            value = "/deleteItem")
+
+    @PostMapping("/editItem")
+    public List<Item> editItem(@RequestBody Item item) {
+        itemService.editItem(item.getId(), item.getName(), item.getDescription(), item.getPrice(), item.getImage());
+        System.out.println("UPDATE " + item.getId());
+        return itemService.getAllItems();
+    }
+
+    @PostMapping("/addItem")
+    public List<Item> addItem(@RequestBody Item item) {
+        System.out.println("ADD");
+        return itemService.addItem(item.getName(), item.getDescription(), item.getPrice(), item.getImage());
+    }
+    @PostMapping("/deleteItem")
     public List<Item> deleteItem(@RequestBody Item item) {
         System.out.println("ОПАЧА УДАЛЯЕМ");
          itemService.deleteItem(item.getId());

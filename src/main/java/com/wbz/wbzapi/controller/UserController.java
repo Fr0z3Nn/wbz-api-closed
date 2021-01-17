@@ -23,9 +23,9 @@ public class UserController {
     }
 
     @PostMapping("/login_check")
-    public User getById(@RequestBody Object user) {
+    public User getById(@RequestBody User user) {
 
         System.out.println(55555555);
-        return userService.getById(1L);
+        return userService.getById(user.getId());
     }
 }
