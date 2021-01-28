@@ -22,7 +22,7 @@ public class UserRestControllerV1 {
         this.userService = userService;
     }
 
-    @GetMapping("{id}")
+    @GetMapping(value = "{id}")
     public ResponseEntity<UserDto> getUserById(@PathVariable(name = "id") Long id){
         User user = userService.findById(id);
 

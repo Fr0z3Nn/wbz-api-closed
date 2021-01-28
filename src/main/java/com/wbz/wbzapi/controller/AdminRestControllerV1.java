@@ -22,11 +22,11 @@ public class AdminRestControllerV1 {
         this.userService = userService;
     }
 
-    @GetMapping("users/{id}")
-    public ResponseEntity<AdminUserDto> getUserById(@PathVariable(name = "id") Long id){
+    @GetMapping(value = "users/{id}")
+    public ResponseEntity<AdminUserDto> getUserById(@PathVariable(name = "id") Long id) {
         User user = userService.findById(id);
 
-        if(user == null){
+        if (user == null) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
 

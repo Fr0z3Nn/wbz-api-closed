@@ -1,5 +1,6 @@
 package com.wbz.wbzapi.security.jwt;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -10,8 +11,8 @@ public class JwtUser implements UserDetails {
 
     private final Long id;
     private final String username;
-    private final String email;
     private final String password;
+    private final String email;
     private final boolean enabled;
     private final Date lastPasswordResetDate;
     private final Collection<? extends GrantedAuthority> authorities;
@@ -21,35 +22,22 @@ public class JwtUser implements UserDetails {
             String username,
             String email,
             String password,
+            Collection<? extends GrantedAuthority> authorities,
             boolean enabled,
-            Date lastPasswordResetDate,
-            Collection<? extends GrantedAuthority> authorities
+            Date lastPasswordResetDate
     ) {
         this.id = id;
         this.username = username;
         this.email = email;
         this.password = password;
+        this.authorities = authorities;
         this.enabled = enabled;
         this.lastPasswordResetDate = lastPasswordResetDate;
-        this.authorities = authorities;
     }
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return authorities;
-    }
-
+    @JsonIgnore
     public Long getId() {
         return id;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    @Override
-    public String getPassword() {
-        return password;
     }
 
     @Override
@@ -57,23 +45,46 @@ public class JwtUser implements UserDetails {
         return username;
     }
 
+    @JsonIgnore
     @Override
     public boolean isAccountNonExpired() {
-        return false;
+        return true;
     }
 
+    @JsonIgnore
     @Override
     public boolean isAccountNonLocked() {
         return true;
     }
 
+    @JsonIgnore
     @Override
     public boolean isCredentialsNonExpired() {
         return true;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    @JsonIgnore
+    @Override
+    public String getPassword() {
+        return password;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return authorities;
+    }
+
     @Override
     public boolean isEnabled() {
         return enabled;
+    }
+
+    @JsonIgnore
+    public Date getLastPasswordResetDate() {
+        return lastPasswordResetDate;
     }
 }

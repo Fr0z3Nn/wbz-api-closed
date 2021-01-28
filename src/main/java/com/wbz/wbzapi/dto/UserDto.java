@@ -16,14 +16,16 @@ public class UserDto {
         user.setId(id);
         user.setUsername(username);
         user.setEmail(email);
+
         return user;
     }
 
-    public static UserDto fromUser(User user){
+    public static UserDto fromUser(User user) {
         UserDto userDto = new UserDto();
-        userDto.setId(userDto.getId());
+        userDto.setId(user.getId());
         userDto.setUsername(user.getUsername());
         userDto.setEmail(user.getEmail());
+
         return userDto;
     }
 }

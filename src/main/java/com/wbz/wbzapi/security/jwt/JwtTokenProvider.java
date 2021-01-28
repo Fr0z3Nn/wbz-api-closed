@@ -29,7 +29,8 @@ public class JwtTokenProvider {
     private String secret;
 
     @Value("${jwt.token.expired}")
-    private Long validityInMilliseconds;
+    private long validityInMilliseconds;
+
 
     @Autowired
     private UserDetailsService userDetailsService;
@@ -53,20 +54,20 @@ public class JwtTokenProvider {
         Date now = new Date();
         Date validity = new Date(now.getTime() + validityInMilliseconds);
 
-        return Jwts.builder()
-                .setClaims(claims)
-                .setIssuedAt(now)
-                .setExpiration(validity)
-                .signWith(SignatureAlgorithm.HS256, secret)
+        return Jwts.builder()//
+                .setClaims(claims)//
+                .setIssuedAt(now)//
+                .setExpiration(validity)//
+                .signWith(SignatureAlgorithm.HS256, secret)//
                 .compact();
     }
 
     public Authentication getAuthentication(String token) {
-        UserDetails userDetails = this.userDetailsService.loadUserByUsername(getLogin(token));
+        UserDetails userDetails = this.userDetailsService.loadUserByUsername(getUsername(token));
         return new UsernamePasswordAuthenticationToken(userDetails, "", userDetails.getAuthorities());
     }
 
-    public String getLogin(String token) {
+    public String getUsername(String token) {
         return Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody().getSubject();
     }
 
@@ -81,9 +82,11 @@ public class JwtTokenProvider {
     public boolean validateToken(String token) {
         try {
             Jws<Claims> claims = Jwts.parser().setSigningKey(secret).parseClaimsJws(token);
+
             if (claims.getBody().getExpiration().before(new Date())) {
                 return false;
             }
+
             return true;
         } catch (JwtException | IllegalArgumentException e) {
             throw new JwtAuthenticationException("JWT token is expired or invalid");
@@ -92,9 +95,11 @@ public class JwtTokenProvider {
 
     private List<String> getRoleNames(List<Role> userRoles) {
         List<String> result = new ArrayList<>();
+
         userRoles.forEach(role -> {
             result.add(role.getName());
         });
+
         return result;
     }
 }

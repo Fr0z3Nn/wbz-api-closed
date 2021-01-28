@@ -13,7 +13,7 @@ public class AdminUserDto {
     private String email;
     private String status;
 
-    public User toUser(){
+    public User toUser() {
         User user = new User();
         user.setId(id);
         user.setUsername(username);
@@ -22,12 +22,12 @@ public class AdminUserDto {
         return user;
     }
 
-    public static AdminUserDto fromUser(User user){
-        AdminUserDto userDto = new AdminUserDto();
-        userDto.setId(userDto.getId());
-        userDto.setUsername(user.getUsername());
-        userDto.setEmail(user.getEmail());
-        userDto.setStatus(user.getStatus().name());
-        return userDto;
+    public static AdminUserDto fromUser(User user) {
+        AdminUserDto adminUserDto = new AdminUserDto();
+        adminUserDto.setId(user.getId());
+        adminUserDto.setUsername(user.getUsername());
+        adminUserDto.setEmail(user.getEmail());
+        adminUserDto.setStatus(user.getStatus().name());
+        return adminUserDto;
     }
 }
