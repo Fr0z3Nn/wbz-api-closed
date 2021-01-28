@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -48,6 +49,11 @@ public class ItemServiceImpl implements ItemService {
                 .build();
         itemRepository.save(item);
         return itemRepository.findAll();
+    }
+
+    @Override
+    public List<Item> findAllByName(String name) {
+        return itemRepository.findAll().stream().filter(n -> n.getName().contains(name)).collect(Collectors.toList());
     }
 
 }

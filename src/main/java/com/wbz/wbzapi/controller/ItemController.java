@@ -39,5 +39,11 @@ public class ItemController {
         itemService.deleteItem(id);
          return itemService.getAllItems();
     }
+
+    @PostMapping("/search/{name}")
+    public List<Item> deleteItem(@PathVariable String name) {
+        System.out.println("ОПАЧА ИЩЕМ");
+        return itemService.findAllByName(name);
+    }
 }
 
