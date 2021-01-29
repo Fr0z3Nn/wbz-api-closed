@@ -1,0 +1,1 @@
+INSERT INTO shop_user( created, status, updated, email, password, username) VALUES ()

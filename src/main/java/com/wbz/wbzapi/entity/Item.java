@@ -1,14 +1,16 @@
 package com.wbz.wbzapi.entity;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 
-
+@Builder
 @Getter
 @Setter
 @Entity
-@ToString
 @AllArgsConstructor
 @Table(name = "item")
 public class Item {
