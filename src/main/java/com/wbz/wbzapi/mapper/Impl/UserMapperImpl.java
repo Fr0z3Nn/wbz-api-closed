@@ -1,5 +1,6 @@
 package com.wbz.wbzapi.mapper.Impl;
 
+import com.wbz.wbzapi.dto.AdminDTO;
 import com.wbz.wbzapi.dto.RoleDTO;
 import com.wbz.wbzapi.dto.UserDTO;
 import com.wbz.wbzapi.entity.Role;
@@ -14,11 +15,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-@RequiredArgsConstructor
 public class UserMapperImpl implements UserMapper {
 
     @Override
     public UserDTO toUserDTO(User user) {
+        UserDTO userDTO = getUserDTO(user);
+        return userDTO;
+    }
+
+    @Override
+    public UserDTO toUserDTOFromAdminRequest(User user) {
+        UserDTO adminDTO = getUserDTO(user);
+        adminDTO.setStatus(user.getStatus().name());
+        return adminDTO;
+    }
+
+    private UserDTO getUserDTO(User user){
         UserDTO userDto = new UserDTO();
         userDto.setId(user.getId());
         userDto.setUsername(user.getUsername());

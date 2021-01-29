@@ -6,4 +6,5 @@ import com.wbz.wbzapi.entity.User;
 
 public interface UserMapper {
     UserDTO toUserDTO(User user);
+    UserDTO toUserDTOFromAdminRequest(User user);
 }

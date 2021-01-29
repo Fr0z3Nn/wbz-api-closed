@@ -15,22 +15,4 @@ public class AdminDTO {
     private String email;
     private String status;
     private List<RoleDTO> roles;
-
-    public User toUser() {
-        User user = new User();
-        user.setId(id);
-        user.setUsername(username);
-        user.setEmail(email);
-        user.setStatus(Status.valueOf(status));
-        return user;
-    }
-
-    public static AdminDTO fromUser(User user) {
-        AdminDTO adminDto = new AdminDTO();
-        adminDto.setId(user.getId());
-        adminDto.setUsername(user.getUsername());
-        adminDto.setEmail(user.getEmail());
-        adminDto.setStatus(user.getStatus().name());
-        return adminDto;
-    }
 }
