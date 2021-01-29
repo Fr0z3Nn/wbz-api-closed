@@ -1,14 +1,11 @@
 package com.wbz.wbzapi.mapper.Impl;
 
-import com.wbz.wbzapi.dto.AdminDTO;
 import com.wbz.wbzapi.dto.RoleDTO;
 import com.wbz.wbzapi.dto.UserDTO;
 import com.wbz.wbzapi.entity.Role;
 import com.wbz.wbzapi.entity.User;
 import com.wbz.wbzapi.mapper.UserMapper;
-import com.wbz.wbzapi.repository.UserRepository;
 
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
