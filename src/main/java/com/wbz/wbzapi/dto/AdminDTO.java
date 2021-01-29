@@ -1,8 +1,6 @@
 package com.wbz.wbzapi.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.wbz.wbzapi.entity.Status;
-import com.wbz.wbzapi.entity.User;
 import lombok.Data;
 
 import java.util.List;

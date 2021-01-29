@@ -1,7 +1,6 @@
 package com.wbz.wbzapi.entity;
 
 import lombok.Data;
-import org.springframework.jmx.export.annotation.ManagedAttribute;
 
 import javax.persistence.*;
 import java.util.List;
