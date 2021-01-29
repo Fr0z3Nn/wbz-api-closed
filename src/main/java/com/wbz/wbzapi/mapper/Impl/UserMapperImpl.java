@@ -29,6 +29,7 @@ public class UserMapperImpl implements UserMapper {
             roleDTO.setName(role.getName());
             rolesDTO.add(roleDTO);
         }
+
         userDto.setRoles(rolesDTO);
         return userDto;
     }
