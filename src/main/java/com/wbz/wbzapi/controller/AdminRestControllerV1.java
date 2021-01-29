@@ -1,6 +1,6 @@
 package com.wbz.wbzapi.controller;
 
-import com.wbz.wbzapi.dto.AdminUserDto;
+import com.wbz.wbzapi.dto.AdminUserDTO;
 import com.wbz.wbzapi.entity.User;
 import com.wbz.wbzapi.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,14 +23,14 @@ public class AdminRestControllerV1 {
     }
 
     @GetMapping(value = "users/{id}")
-    public ResponseEntity<AdminUserDto> getUserById(@PathVariable(name = "id") Long id) {
+    public ResponseEntity<AdminUserDTO> getUserById(@PathVariable(name = "id") Long id) {
         User user = userService.findById(id);
 
         if (user == null) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
 
-        AdminUserDto result = AdminUserDto.fromUser(user);
+        AdminUserDTO result = AdminUserDTO.fromUser(user);
 
         return new ResponseEntity<>(result, HttpStatus.OK);
     }

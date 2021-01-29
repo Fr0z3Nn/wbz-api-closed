@@ -1,6 +1,7 @@
 package com.wbz.wbzapi.controller;
 
-import com.wbz.wbzapi.dto.AuthenticationRequestDto;
+import com.wbz.wbzapi.dto.AuthenticationRequestDTO;
+import com.wbz.wbzapi.dto.UserDTO;
 import com.wbz.wbzapi.entity.User;
 import com.wbz.wbzapi.security.jwt.JwtTokenProvider;
 import com.wbz.wbzapi.service.UserService;
@@ -37,7 +38,7 @@ public class AuthenticationRestControllerV1 {
     }
 
     @PostMapping("login")
-    public ResponseEntity login(@RequestBody AuthenticationRequestDto requestDto) {
+    public ResponseEntity login(@RequestBody AuthenticationRequestDTO requestDto) {
         try {
             String username = requestDto.getUsername();
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, requestDto.getPassword()));
@@ -52,6 +53,7 @@ public class AuthenticationRestControllerV1 {
             Map<Object, Object> response = new HashMap<>();
             response.put("username", username);
             response.put("token", token);
+            response.put("role", UserDTO.fromUser(user).getRoles());
 
             return ResponseEntity.ok(response);
         } catch (AuthenticationException e) {

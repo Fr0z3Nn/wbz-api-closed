@@ -1,12 +1,8 @@
 package com.wbz.wbzapi.controller;
 
-import com.wbz.wbzapi.dto.UserDto;
-import com.wbz.wbzapi.entity.Item;
+import com.wbz.wbzapi.dto.UserDTO;
 import com.wbz.wbzapi.entity.User;
-import com.wbz.wbzapi.service.Impl.ItemServiceImpl;
-import com.wbz.wbzapi.service.Impl.UserServiceImpl;
 import com.wbz.wbzapi.service.UserService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,14 +19,14 @@ public class UserRestControllerV1 {
     }
 
     @GetMapping(value = "{id}")
-    public ResponseEntity<UserDto> getUserById(@PathVariable(name = "id") Long id){
+    public ResponseEntity<UserDTO> getUserById(@PathVariable(name = "id") Long id){
         User user = userService.findById(id);
 
         if(user == null){
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
 
-        UserDto result = UserDto.fromUser(user);
+        UserDTO result = UserDTO.fromUser(user);
 
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
