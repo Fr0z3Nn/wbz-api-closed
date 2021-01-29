@@ -13,7 +13,6 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class ItemServiceImpl implements ItemService {
 
-
     private final ItemRepository itemRepository;
 
     @Override
@@ -29,7 +28,7 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     public List<Item> editItem(Long id, String name, String description, double price, String image) {
-       Item updatedItem = itemRepository.findById(id).orElseThrow(IllegalStateException::new);
+        Item updatedItem = itemRepository.findById(id).orElseThrow(IllegalStateException::new);
         updatedItem.setName(name);
         updatedItem.setDescription(description);
         updatedItem.setPrice(price);

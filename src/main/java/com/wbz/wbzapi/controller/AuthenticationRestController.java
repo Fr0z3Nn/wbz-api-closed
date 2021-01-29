@@ -23,7 +23,7 @@ import java.util.Map;
 @RestController
 @RequestMapping(value = "/api/auth/")
 @RequiredArgsConstructor
-public class AuthenticationRestControllerV1 {
+public class AuthenticationRestController {
 
     private final AuthenticationManager authenticationManager;
 
@@ -49,7 +49,6 @@ public class AuthenticationRestControllerV1 {
             Map<Object, Object> response = new HashMap<>();
             response.put("username", username);
             response.put("token", token);
-            response.put("role", userMapper.toUserDTO(user).getRoles());
 
             return ResponseEntity.ok(response);
         } catch (AuthenticationException e) {
