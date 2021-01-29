@@ -3,8 +3,10 @@ package com.wbz.wbzapi.controller;
 import com.wbz.wbzapi.dto.AuthenticationRequestDTO;
 import com.wbz.wbzapi.dto.UserDTO;
 import com.wbz.wbzapi.entity.User;
+import com.wbz.wbzapi.mapper.UserMapper;
 import com.wbz.wbzapi.security.jwt.JwtTokenProvider;
 import com.wbz.wbzapi.service.UserService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -22,6 +24,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping(value = "/api/auth/")
+@RequiredArgsConstructor
 public class AuthenticationRestControllerV1 {
 
     private final AuthenticationManager authenticationManager;
@@ -30,12 +33,7 @@ public class AuthenticationRestControllerV1 {
 
     private final UserService userService;
 
-    @Autowired
-    public AuthenticationRestControllerV1(AuthenticationManager authenticationManager, JwtTokenProvider jwtTokenProvider, UserService userService) {
-        this.authenticationManager = authenticationManager;
-        this.jwtTokenProvider = jwtTokenProvider;
-        this.userService = userService;
-    }
+    private final UserMapper userMapper;
 
     @PostMapping("login")
     public ResponseEntity login(@RequestBody AuthenticationRequestDTO requestDto) {
@@ -53,7 +51,7 @@ public class AuthenticationRestControllerV1 {
             Map<Object, Object> response = new HashMap<>();
             response.put("username", username);
             response.put("token", token);
-            response.put("role", UserDTO.fromUser(user).getRoles());
+            response.put("role", userMapper.toUserDTO(user).getRoles());
 
             return ResponseEntity.ok(response);
         } catch (AuthenticationException e) {

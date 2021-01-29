@@ -2,7 +2,9 @@ package com.wbz.wbzapi.controller;
 
 import com.wbz.wbzapi.dto.UserDTO;
 import com.wbz.wbzapi.entity.User;
+import com.wbz.wbzapi.mapper.UserMapper;
 import com.wbz.wbzapi.service.UserService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,13 +12,12 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("api/users/")
+@RequiredArgsConstructor
 public class UserRestControllerV1 {
-    private final UserService userService;
 
-    @Autowired
-    public UserRestControllerV1(UserService userService) {
-        this.userService = userService;
-    }
+    private final UserService userService;
+    private final UserMapper userMapper;
+
 
     @GetMapping(value = "{id}")
     public ResponseEntity<UserDTO> getUserById(@PathVariable(name = "id") Long id){
@@ -26,7 +27,7 @@ public class UserRestControllerV1 {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
 
-        UserDTO result = UserDTO.fromUser(user);
+        UserDTO result = userMapper.toUserDTO(user);
 
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
