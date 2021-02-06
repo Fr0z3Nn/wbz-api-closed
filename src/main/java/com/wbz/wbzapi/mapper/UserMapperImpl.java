@@ -1,4 +1,4 @@
-package com.wbz.wbzapi.mapper.Impl;
+package com.wbz.wbzapi.mapper;
 
 import com.wbz.wbzapi.dto.RoleDTO;
 import com.wbz.wbzapi.dto.UserDTO;
