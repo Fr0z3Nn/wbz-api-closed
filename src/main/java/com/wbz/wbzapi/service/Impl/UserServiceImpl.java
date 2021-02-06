@@ -12,6 +12,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -20,22 +21,27 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
-    private RoleRepository roleRepository;
+    private final RoleRepository roleRepository;
     private final BCryptPasswordEncoder passwordEncoder;
 
     @Override
     public User register(User user) {
+        User userToRegister = new User();
         Role roleUser = roleRepository.findByName("ROLE_USER");
         List<Role> userRoles = new ArrayList<>();
         userRoles.add(roleUser);
 
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.setRoles(userRoles);
-        user.setStatus(Status.ACTIVE);
+        userToRegister.setCreated(new Date());
+        userToRegister.setUpdated(new Date());
+        userToRegister.setUsername(user.getUsername());
+        userToRegister.setEmail(user.getEmail());
+        userToRegister.setPassword(passwordEncoder.encode(user.getPassword()));
+        userToRegister.setRoles(userRoles);
+        userToRegister.setStatus(Status.ACTIVE);
 
-        User registeredUser = userRepository.save(user);
-        log.info("IN register - user: {} succesfully registered", registeredUser);
-        return registeredUser;
+        userRepository.save(userToRegister);
+        log.info("IN register - user: {} succesfully registered", userToRegister);
+        return userToRegister;
     }
 
     @Override

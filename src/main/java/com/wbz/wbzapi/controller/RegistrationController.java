@@ -1,6 +1,8 @@
 package com.wbz.wbzapi.controller;
 
 import com.wbz.wbzapi.dto.UserDTO;
+import com.wbz.wbzapi.entity.User;
+import com.wbz.wbzapi.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -11,10 +13,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequiredArgsConstructor
 @Slf4j
-@RequestMapping("/api/auth/")
+@RequestMapping("/api/")
 public class RegistrationController {
+
+    private final UserService userService;
+
     @RequestMapping("register")
-    public ResponseEntity editItem(@RequestBody UserDTO userDTO) {
-        return ResponseEntity.ok("suc");
+    public void registerUser(@RequestBody User user) {
+        System.out.println(userService.register(user));
     }
 }
