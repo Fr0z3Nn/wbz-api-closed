@@ -13,5 +13,5 @@ public interface ItemService {
 
     List<Item> addItem(String name, String description, double price, String image);
 
-    List<Item> findAllByName(String name);
+    Item findItemByName(String name);
 }

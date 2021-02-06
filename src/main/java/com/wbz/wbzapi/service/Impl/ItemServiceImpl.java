@@ -49,8 +49,8 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public List<Item> findAllByName(String name) {
-        return itemRepository.findAll().stream().filter(n -> n.getName().contains(name)).collect(Collectors.toList());
+    public Item findItemByName(String name) {
+        return itemRepository.findByName(name);
     }
 
 }

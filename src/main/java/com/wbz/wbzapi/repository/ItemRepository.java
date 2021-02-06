@@ -20,4 +20,6 @@ public interface ItemRepository extends JpaRepository<Item, Long> {
 
     @Override
     void deleteById(Long id);
+
+    Item findByName(String name);
 }
