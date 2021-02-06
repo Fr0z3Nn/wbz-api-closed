@@ -1,6 +1,7 @@
 package com.wbz.wbzapi.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.wbz.wbzapi.entity.Status;
 import lombok.Builder;
 import lombok.Data;
 
@@ -13,6 +14,6 @@ public class UserDTO {
     private Long id;
     private String username;
     private String email;
-    private String status;
+    private Status status;
     private List<RoleDTO> roles;
 }

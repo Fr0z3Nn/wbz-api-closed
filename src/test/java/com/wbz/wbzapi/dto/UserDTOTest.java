@@ -25,36 +25,4 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 public class UserDTOTest {
-
-    @Autowired
-    private UserMapper userMapper;
-
-    private User user;
-
-    @BeforeEach
-    void setUpUser() {
-        user = new User();
-        user.setId(12345L);
-        user.setEmail("@gmail.ru");
-        user.setUsername("john");
-        Role userRole1 = new Role();
-        userRole1.setName("USER");
-        Role userRole2 = new Role();
-        userRole2.setName("ADMIN");
-        userRole2.setUsers(new ArrayList<>(Collections.singletonList(user)));
-        user.setRoles(new ArrayList<>(Arrays.asList(userRole1, userRole2)));
-    }
-
-    //TODO не полный из-за отстутствия ролемаппера(сдлетаь его), а также статуса в юзер ДТО
-
-    @Test
-    @DisplayName("Получение DTO из User")
-    public void userToUserDTO() {
-        UserDTO userDTO = userMapper.toUserDTO(user);
-        assertAll("Проверка id,username,email",
-                () -> assertEquals(user.getId(),userDTO.getId()),
-                () -> assertEquals(user.getUsername(), userDTO.getUsername()),
-                () -> assertEquals(user.getEmail(), userDTO.getEmail())
-        );
-    }
 }

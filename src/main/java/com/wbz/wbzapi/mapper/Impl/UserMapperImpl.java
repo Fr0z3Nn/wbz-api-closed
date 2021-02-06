@@ -37,7 +37,7 @@ public class UserMapperImpl implements UserMapper {
                             .build());
         }
         if (userRole.equals("ADMIN")) {
-            userDto.setStatus(user.getStatus().name());
+            userDto.setStatus(user.getStatus());
         }
         userDto.setRoles(rolesDTO);
         return userDto;
