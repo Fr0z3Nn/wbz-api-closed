@@ -33,6 +33,7 @@ public class ItemServiceImpl implements ItemService {
         updatedItem.setDescription(description);
         updatedItem.setPrice(price);
         updatedItem.setImage(image);
+        itemRepository.save(updatedItem);
         return itemRepository.findAll();
     }
 
