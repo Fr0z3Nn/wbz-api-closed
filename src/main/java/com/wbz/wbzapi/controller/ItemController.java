@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -43,9 +44,9 @@ public class ItemController {
     }
 
     @PostMapping("/search/{name}")
-    public List<Item> searchItem(@PathVariable String name) {
+    public Item searchItem(@PathVariable String name) {
         log.info("IN searchItem - query success / Прилетел запрос из метода searchItem: - {}", name);
-        return itemService.findAllByName(name);
+        return itemService.findItemByName(name);
     }
 }
 
