@@ -7,7 +7,14 @@ import com.wbz.wbzapi.mapper.UserMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.context.TestConfiguration;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -15,16 +22,14 @@ import java.util.Collections;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-
+@ExtendWith(SpringExtension.class)
+@SpringBootTest
 public class UserDTOTest {
 
+    @Autowired
     private UserMapper userMapper;
-    private User user;
 
-    @BeforeEach
-    void setUpMapper() {
-        this.userMapper = new UserMapperImpl();
-    }
+    private User user;
 
     @BeforeEach
     void setUpUser() {
