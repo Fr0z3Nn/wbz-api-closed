@@ -34,10 +34,10 @@ public class AuthenticationRestController {
     private final UserMapper userMapper;
 
     @PostMapping("/login")
-    public ResponseEntity login(@RequestBody AuthenticationRequestDTO requestDto) {
+    public ResponseEntity login(@RequestBody AuthenticationRequestDTO requestDTO) {
         try {
-            String username = requestDto.getUsername();
-            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, requestDto.getPassword()));
+            String username = requestDTO.getUsername();
+            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, requestDTO.getPassword()));
             User user = userService.findByUsername(username);
 
             if (user == null) {

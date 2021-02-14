@@ -3,6 +3,7 @@ package com.wbz.wbzapi.service.Impl;
 import com.wbz.wbzapi.entity.Role;
 import com.wbz.wbzapi.entity.Status;
 import com.wbz.wbzapi.entity.User;
+import com.wbz.wbzapi.handler.exception.UserNotFoundException;
 import com.wbz.wbzapi.repository.RoleRepository;
 import com.wbz.wbzapi.repository.UserRepository;
 import com.wbz.wbzapi.service.UserService;
@@ -60,13 +61,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User findById(Long id) {
-        User result = userRepository.findById(id).orElse(null);
-        if (result == null){
-            log.warn("IN findById - no user found by id: {}", id);
-            return null;
-        }
-        log.info("IN findById - user: {} found by id: {}", result);
-        return result;
+        return userRepository
+                .findById(id)
+                .orElseThrow(
+                        () -> new UserNotFoundException(String.format("Пользователь с ID %d отсутствует", id))
+                );
     }
 
     @Override
