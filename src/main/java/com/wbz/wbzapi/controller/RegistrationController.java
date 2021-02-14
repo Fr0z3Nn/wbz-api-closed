@@ -13,12 +13,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequiredArgsConstructor
 @Slf4j
-@RequestMapping("/api/")
+@RequestMapping("/api")
 public class RegistrationController {
 
     private final UserService userService;
 
-    @RequestMapping("register")
+    @RequestMapping("/register")
     public void registerUser(@RequestBody User user) {
         System.out.println(userService.register(user));
     }

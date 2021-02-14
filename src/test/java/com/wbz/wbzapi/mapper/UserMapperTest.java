@@ -45,6 +45,7 @@ public class UserMapperTest {
     @Test
     @DisplayName("Получение DTO из User (ЮЗЕР)")
     public void userToUserDTO() {
+        System.out.println(123);
         UserDTO userDTO = userMapper.toUserDTO(user);
         assertAll(
                 () -> assertEquals(user.getId(), userDTO.getId()),

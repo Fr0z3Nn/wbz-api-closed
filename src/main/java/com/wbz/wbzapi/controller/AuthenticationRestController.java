@@ -21,7 +21,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-@RequestMapping(value = "/api/auth/")
+@RequestMapping(value = "/api/auth")
 @RequiredArgsConstructor
 public class AuthenticationRestController {
 
@@ -33,7 +33,7 @@ public class AuthenticationRestController {
 
     private final UserMapper userMapper;
 
-    @PostMapping("login")
+    @PostMapping("/login")
     public ResponseEntity login(@RequestBody AuthenticationRequestDTO requestDto) {
         try {
             String username = requestDto.getUsername();

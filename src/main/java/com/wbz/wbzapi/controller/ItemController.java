@@ -18,7 +18,7 @@ public class ItemController {
 
     private final ItemServiceImpl itemService;
 
-    @RequestMapping("/")
+    @GetMapping("/")
     public List<Item> getItem() {
         log.info("IN getItem - query success / Прилетел запрос из метода getItem");
         return itemService.getAllItems();

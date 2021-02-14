@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("api/users/")
+@RequestMapping("api/users")
 @RequiredArgsConstructor
 public class UserRestController {
 
@@ -21,7 +21,7 @@ public class UserRestController {
     private final UserMapper userMapper;
 
 
-    @GetMapping(value = "{id}")
+    @GetMapping(value = "/{id}")
     public ResponseEntity<UserDTO> getUserById(@PathVariable(name = "id") Long id){
         User user = userService.findById(id);
 
