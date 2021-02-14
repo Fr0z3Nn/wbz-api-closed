@@ -2,57 +2,41 @@ package com.wbz.wbzapi.controller;
 
 import com.wbz.wbzapi.dto.AuthenticationRequestDTO;
 import com.wbz.wbzapi.entity.User;
-import com.wbz.wbzapi.mapper.UserMapper;
 import com.wbz.wbzapi.security.jwt.JwtTokenProvider;
+import com.wbz.wbzapi.service.AutheticationService;
 import com.wbz.wbzapi.service.UserService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.HashMap;
-import java.util.Map;
-
 @RestController
 @RequestMapping(value = "/api/auth")
 @RequiredArgsConstructor
+@Tag(name = "Контроллер аутентификации", description = "Позволяет проводить аутентификацию пользователя")
 public class AuthenticationRestController {
-
-    private final AuthenticationManager authenticationManager;
 
     private final JwtTokenProvider jwtTokenProvider;
 
     private final UserService userService;
 
-    private final UserMapper userMapper;
+    private final AutheticationService autheticationService;
 
     @PostMapping("/login")
-    public ResponseEntity login(@RequestBody AuthenticationRequestDTO requestDTO) {
-        try {
-            String username = requestDTO.getUsername();
-            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, requestDTO.getPassword()));
-            User user = userService.findByUsername(username);
-
-            if (user == null) {
-                throw new UsernameNotFoundException("User with username: " + username + " not found");
-            }
-
-            String token = jwtTokenProvider.createToken(username, user.getRoles());
-
-            Map<Object, Object> response = new HashMap<>();
-            response.put("username", username);
-            response.put("token", token);
-
-            return ResponseEntity.ok(response);
-        } catch (AuthenticationException e) {
-            throw new BadCredentialsException("Invalid username or password");
-        }
+    @Operation(
+            summary = "Логин пользователя",
+            description = "Позволяет проводить аутентификацию пользователя. Ответ - токен JWT"
+    )
+    public ResponseEntity<String> login(@RequestBody AuthenticationRequestDTO requestDTO) {
+        String username = requestDTO.getUsername();
+        String password = requestDTO.getPassword();
+        autheticationService.authenticate(username, password);
+        User user = userService.findByUsername(username);
+        String token = jwtTokenProvider.createToken(username, user.getRoles());
+        return ResponseEntity.ok(token);
     }
 }

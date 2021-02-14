@@ -9,6 +9,8 @@ import com.wbz.wbzapi.repository.UserRepository;
 import com.wbz.wbzapi.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -54,9 +56,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User findByUsername(String username) {
-        User result = userRepository.findByUsername(username);
-        log.info("IN findByLogin - user: {} found by login: {}", result, username);
-        return result;
+        return userRepository
+                .findByUsername(username)
+                .orElseThrow(
+                        () -> new UserNotFoundException(String.format("Пользователь с USERNAME - %s отсутствует", username))
+                );
+
+
     }
 
     @Override
@@ -67,6 +73,8 @@ public class UserServiceImpl implements UserService {
                         () -> new UserNotFoundException(String.format("Пользователь с ID %d отсутствует", id))
                 );
     }
+
+
 
     @Override
     public void delete(Long id) {
