@@ -9,9 +9,9 @@ public interface ItemService {
 
     List<Item> getAllItems();
 
-    List<Item> editItem(Long id, String name, String description, double price, String image);
+    List<Item> editItem(Item item);
 
-    List<Item> addItem(String name, String description, double price, String image);
+    List<Item> addItem(Item item);
 
     Item findItemByName(String name);
 }

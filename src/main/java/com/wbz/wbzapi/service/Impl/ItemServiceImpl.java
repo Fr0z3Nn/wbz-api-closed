@@ -32,24 +32,15 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public List<Item> editItem(Long id, String name, String description, double price, String image) {
-        Item updatedItem = itemRepository.findById(id).orElseThrow(IllegalStateException::new);
-        updatedItem.setName(name);
-        updatedItem.setDescription(description);
-        updatedItem.setPrice(price);
-        updatedItem.setImage(image);
-        itemRepository.save(updatedItem);
+    public List<Item> editItem(Item item) {
+        itemRepository.findById(item.getId())
+                .map(itemRepository::save)
+                .orElseThrow(() -> new ItemNotFoundException("Данного товара не существует"));
         return itemRepository.findAll();
     }
 
     @Override
-    public List<Item> addItem(String name, String description, double price, String image) {
-        Item item = Item.builder()
-                .name(name)
-                .description(description)
-                .price(price)
-                .image(image)
-                .build();
+    public List<Item> addItem(Item item) {
         itemRepository.save(item);
         return itemRepository.findAll();
     }

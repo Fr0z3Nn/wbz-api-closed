@@ -6,6 +6,7 @@ import com.wbz.wbzapi.service.AuthorizationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import org.springframework.http.HttpHeaders;
 import java.util.List;
 
 
@@ -15,7 +16,8 @@ public class AuthorizationServiceImpl implements AuthorizationService {
     private final JwtTokenProvider jwtTokenProvider;
 
     @Override
-    public void validateToken(List<String> token) {
+    public void validateToken(HttpHeaders httpHeaders) {
+        List<String> token = httpHeaders.get("AUTHORISATION_TOKEN");
         if (token.isEmpty() || !jwtTokenProvider.validateToken(token.get(0)))
             throw new JwtAuthenticationException("Нет прав на доступ");
     }

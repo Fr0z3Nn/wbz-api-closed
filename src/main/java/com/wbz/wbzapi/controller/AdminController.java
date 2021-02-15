@@ -31,7 +31,7 @@ public class AdminController {
     )
 
     public ResponseEntity<UserDTO> getUserById(@RequestHeader HttpHeaders httpHeaders, @PathVariable(name = "id") Long id) {
-        authorizationService.validateToken(httpHeaders.get("AUTHORISATION_TOKEN"));
+        authorizationService.validateToken(httpHeaders);
         User user = userService.findById(id);
         UserDTO result = userMapper.toUserDTOFromAdminRequest(user);
         return new ResponseEntity<>(result, HttpStatus.OK);
