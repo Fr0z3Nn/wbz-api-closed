@@ -10,7 +10,7 @@ import java.util.Optional;
 @Repository
 public interface ItemRepository extends JpaRepository<Item, Long> {
     @Override
-    Optional<Item> findById(Long aLong);
+    Optional<Item> findById(Long id);
 
     @Override
     List<Item> findAll();

@@ -1,13 +1,13 @@
 package com.wbz.wbzapi.service.Impl;
 
 import com.wbz.wbzapi.entity.Item;
+import com.wbz.wbzapi.handler.exception.ItemNotFoundException;
 import com.wbz.wbzapi.repository.ItemRepository;
 import com.wbz.wbzapi.service.ItemService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -23,7 +23,12 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     public List<Item> getAllItems() {
-        return itemRepository.findAll();
+        List<Item> itemList = itemRepository.findAll();
+        if (itemRepository.findAll().isEmpty()) {
+            throw new ItemNotFoundException("Список товаров пуст");
+        } else {
+            return itemList;
+        }
     }
 
     @Override

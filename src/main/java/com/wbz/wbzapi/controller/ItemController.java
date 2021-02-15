@@ -2,6 +2,7 @@ package com.wbz.wbzapi.controller;
 
 import com.wbz.wbzapi.entity.Item;
 import com.wbz.wbzapi.service.Impl.ItemServiceImpl;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
@@ -14,13 +15,13 @@ import java.util.List;
 @RequiredArgsConstructor
 @Slf4j
 @RequestMapping("/api/item")
+@Tag(name = "Итем контроллер", description = "API для работы со стороны администрации")
 public class ItemController {
 
     private final ItemServiceImpl itemService;
 
     @GetMapping("/")
     public List<Item> getItem() {
-        log.info("IN getItem - query success / Прилетел запрос из метода getItem");
         return itemService.getAllItems();
     }
 

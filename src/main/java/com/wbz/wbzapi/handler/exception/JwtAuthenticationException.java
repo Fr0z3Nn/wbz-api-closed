@@ -1,4 +1,4 @@
-package com.wbz.wbzapi.security.jwt;
+package com.wbz.wbzapi.handler.exception;
 
 import org.springframework.security.core.AuthenticationException;
 

@@ -1,4 +1,4 @@
-package com.wbz.wbzapi.config;
+package com.wbz.wbzapi.config.security;
 
 import com.wbz.wbzapi.security.jwt.JwtConfigurer;
 import com.wbz.wbzapi.security.jwt.JwtTokenProvider;
